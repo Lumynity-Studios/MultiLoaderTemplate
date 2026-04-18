@@ -1,0 +1,36 @@
+[versions]
+minecraft = "26.1.2"
+
+# https://files.minecraftforge.net/net/minecraftforge/forge/
+forge = "64.0.4"
+# https://projects.neoforged.net/neoforged/neoforge
+neoforge = "26.1.2.12-beta"
+
+# https://fabricmc.net/develop
+fabric_loader = "0.19.2"
+fabric_api = "0.146.0+26.1.2"
+fabric_loom = "1.16-SNAPSHOT"
+
+# https://projects.neoforged.net/neoforged/moddevgradle
+moddevgradle = "2.0.141"
+
+# https://files.minecraftforge.net/net/minecraftforge/forgegradle/index.html
+forge_gradle = "7.0.20"
+# https://files.minecraftforge.net/net/minecraftforge/jarjar-gradle/index.html
+forge_jarjar = "0.2.3"
+
+# https://github.com/GradleUp/shadow/releases
+shadow = "9.4.1"
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+[plugins]
+fabric_loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric_loom" }
+moddevgradle = { id = "net.neoforged.moddev", version.ref = "moddevgradle" }
+forge_gradle = { id = "net.minecraftforge.gradle", version.ref = "forge_gradle" }
+forge_jarjar = { id = "net.minecraftforge.jarjar", version.ref = "forge_jarjar" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

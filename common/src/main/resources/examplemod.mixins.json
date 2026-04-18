@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.lumynity.examplemod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "client.ExampleClientMixin"
+  ],
+  "mixins": [
+    "ExampleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
