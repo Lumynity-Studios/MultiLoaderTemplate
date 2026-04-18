@@ -42,6 +42,10 @@ dependencies {
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
 
+    // Fabric Loader has MixinExtras built-in since 0.15.0 but not MixinSquared
+    //include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${libs.versions.mixinextras.get()}")))
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")))
+
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }

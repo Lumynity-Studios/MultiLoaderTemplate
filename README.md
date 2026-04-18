@@ -12,5 +12,4 @@ respective mod loaders.
 - To remove any loader from the project, simply remove it from `include("common", "fabric", "forge")` in `settings.gradle.kts`
 - Launching Forge and NeoForge in a development environment doesn't work.
   Some common resources such as mixins don't carry over to Forge when running development environment which makes Forge refuse to run.
-- This 1.20.1 template comes with datagen code ready for all loaders
-  - You need to uncomment some code in Fabric and Forge `build.gradle` as well as Common
+- If you entirely don't want datagen, you can delete `architectury.common.json`, `examplemod.accesswidener`, and `template.accesswidener` files.

@@ -33,12 +33,11 @@ subprojects {
 
     repositories {
         maven("https://maven.parchmentmc.org")
-
         maven("https://maven.minecraftforge.net/")
         maven("https://repo.spongepowered.org/repository/maven-public/")
-        
-        maven("https://jitpack.io")
-        maven("https://maven.terraformersmc.com/")
+        maven("https://maven.bawnorton.com/releases") // MixinSqured
+        maven("https://maven.enjarai.dev/mirrors") // MixinSqured
+        maven("https://maven.terraformersmc.com/") // Mod Menu
     }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
