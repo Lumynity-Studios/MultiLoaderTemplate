@@ -9,7 +9,8 @@ respective mod loaders.
 - The output JAR always follows the format of `ModName-version+mc[minecraft_version]-Platform.jar`, for example `AlwaysShield-1.2.1+mc26.1-Fabric.jar`.
   - If there exists a classifier, that is not your intended output JAR
 - If you want to compile a JAR for all mods, you should run the `build` or `assemble` task.
-- To remove any loader from the project, simply remove it from `include("common", "fabric", "forge")` in `settings.gradle.kts`
+- To remove any loader from the project, simply remove it from `include("common", "fabric", "quilt", "forge", "neoforge")` in `settings.gradle.kts`
+  - <sub><i>Ok but who the hell actually develops for NeoForge individually from Forge on 1.20.1? And who the hell uses Quilt??</i></sub>
 - Launching Forge and NeoForge in a development environment doesn't work.
   Some common resources such as mixins don't carry over to Forge when running development environment which makes Forge refuse to run.
 - If you entirely don't want datagen, you can delete `architectury.common.json`, `examplemod.accesswidener`, and `template.accesswidener` files.
