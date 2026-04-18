@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "xyz.bluspring.template.neoforge.mixin",
+  "package": "net.lumynity.examplemod.neoforge.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
   ],
