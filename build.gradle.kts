@@ -18,7 +18,7 @@ architectury {
 
 allprojects {
     group = rootProject.property("maven_group") as String
-    version = "${rootProject.property("mod_version")}+mc${mcVersion}"
+    version = rootProject.property("mod_version") as String
 
     base { archivesName.set(rootProject.property("archives_base_name") as String) }
 
@@ -83,10 +83,11 @@ subprojects {
     }
 
     // From this comment and below: TO FIX
-    tasks.matching { it.name == "shadowJar" }.configureEach { task ->
-        if (task.hasProperty("archiveBaseName")) {
-            task.archiveBaseName.set(rootProject.archives_name)
-            task.archiveVersion.set(project.version.toString())
+    tasks.matching { it.name == "shadowJar" }.configureEach {
+        if (hasProperty("archiveBaseName")) {
+            // Gradle is complaining abt this - TO FIX
+            it.archiveBaseName.set(rootProject.property("archives_base_name"))
+            it.archiveVersion.set(project.version.toString())
         }
     }
 }
