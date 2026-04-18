@@ -25,9 +25,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "neoforge"
+modId = "lumynlib"
 type = "required"
-versionRange = "[${neoforge_version},)"
+versionRange = "[1,)"
 ordering = "NONE"
 side = "BOTH"
 
