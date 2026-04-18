@@ -1,32 +1,33 @@
-modLoader="javafml"
-loaderVersion="[0,)"
-license = "${mod_license}"
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/Lumynity-Studios/LumynLib/issues"
+license = "All Rights Reserved"
 
 [[mods]]
-modId = "${mod_id}"
+modId = "lumynlib"
 version = "${mod_version}"
-displayName = "${mod_name}"
-description = "${mod_description}"
-authors = "${mod_authors}"
+displayName = "LumynLib"
+description = "Multi-tool library mod for mods by Lumynity Studios"
+authors = "Lumynity Studios"
 logoFile = "icon.png"
 
-[[dependencies.${mod_id}]]
-modId = "minecraft"
-mandatory = true
-versionRange = "${minecraft_version_constraint}"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
+[[dependencies.lumynlib]]
 modId = "forge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "[${forge_version_range},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "lumynlib"
+[[dependencies.lumynlib]]
+modId = "minecraft"
 mandatory = true
-versionRange = "[1,)"
+versionRange = "[${minecraft_version}]"
 ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lumynlib]]
+modId = "architectury"
+mandatory = true
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER"
 side = "BOTH"

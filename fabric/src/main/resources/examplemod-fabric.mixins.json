@@ -1,14 +1,13 @@
 {
   "required": true,
+  "package": "net.lumynity.examplemod.mixin.fabric",
+  "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "package": "net.lumynity.examplemod.fabric.mixin",
-  "compatibilityLevel": "JAVA_25",
+  "client": [
+  ],
   "mixins": [
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
   }
 }

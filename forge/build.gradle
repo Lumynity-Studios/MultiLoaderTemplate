@@ -1,0 +1,85 @@
+plugins {
+    id 'com.gradleup.shadow'
+}
+
+loom {
+    forge {
+        mixinConfig "lumynlib.mixins.json"
+    }
+}
+
+def generatedResources = file("src/generated")
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
+loom {
+    forge {
+        mixinConfig "${rootProject.property("mod_id")}.mixins.json",
+                "${rootProject.property("mod_id")}-forge.mixins.json"
+    }
+
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "${rootProject.property("mod_id")}"
+            programArgs "--output", generatedResources.absolutePath
+        }
+    }
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
+
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:$rootProject.forge"
+    modImplementation "net.minecraftforge:forge:$rootProject.forge"
+
+    modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api"
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+}
+
+processResources {
+    inputs.property 'mod_version', project.mod_version
+    inputs.property 'minecraft_version', project.minecraft_version
+    inputs.property 'forge_version_range', project.forge_version_range
+    inputs.property 'architectury_api_version', project.architectury_api_version
+
+    filesMatching('META-INF/mods.toml') {
+        expand mod_version: inputs.properties.mod_version,
+                forge_version_range: inputs.properties.forge_version_range,
+                minecraft_version: inputs.properties.minecraft_version,
+                architectury_api_version: inputs.properties.architectury_api_version
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+}
