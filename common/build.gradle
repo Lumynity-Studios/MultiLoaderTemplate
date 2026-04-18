@@ -26,7 +26,7 @@ dependencies {
 
     // Common (Common/Fabric) dependencies go here
     //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Fabric")
-    //modImplementation(libs.versions.arch.api.get())
+    //modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
     //modImplementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 }
 

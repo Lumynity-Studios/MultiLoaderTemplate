@@ -1,13 +1,8 @@
 plugins {
-    id 'com.gradleup.shadow'
+    id("com.gradleup.shadow")
 }
 
-loom {
-    forge {
-        mixinConfig "lumynlib.mixins.json"
-    }
-}
-
+/* Uncomment if you want datagen
 def generatedResources = file("src/generated")
 
 sourceSets {
@@ -15,6 +10,7 @@ sourceSets {
         resources.srcDir generatedResources
     }
 }
+ */
 
 loom {
     forge {
@@ -22,12 +18,15 @@ loom {
                 "${rootProject.property("mod_id")}-forge.mixins.json"
     }
 
+
     runs {
+        /* Uncomment if you want datagen
         data {
             data()
             programArgs "--all", "--mod", "${rootProject.property("mod_id")}"
             programArgs "--output", generatedResources.absolutePath
         }
+         */
     }
 }
 
@@ -52,26 +51,28 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:$rootProject.forge"
-    modImplementation "net.minecraftforge:forge:$rootProject.forge"
+    forge("net.minecraftforge:forge:${libs.versions.minecraft.get()}-${libs.versions.forge.get()}")
+    modImplementation("net.minecraftforge:forge:${libs.versions.minecraft.get()}-${libs.versions.forge.get()}")
 
-    modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api"
+    // Forge dependencies go here
+    //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Forge")
+    //modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
+    //modImplementation("com.github.glitchfiend:TerraBlender-forge:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
 }
 
 processResources {
-    inputs.property 'mod_version', project.mod_version
-    inputs.property 'minecraft_version', project.minecraft_version
-    inputs.property 'forge_version_range', project.forge_version_range
-    inputs.property 'architectury_api_version', project.architectury_api_version
-
     filesMatching('META-INF/mods.toml') {
-        expand mod_version: inputs.properties.mod_version,
-                forge_version_range: inputs.properties.forge_version_range,
-                minecraft_version: inputs.properties.minecraft_version,
-                architectury_api_version: inputs.properties.architectury_api_version
+        expand "mod_id": rootProject.property("mod_id"),
+                "mod_name": rootProject.property("mod_name"),
+                "mod_version": rootProject.property("mod_version"),
+                "mod_description": rootProject.property("mod_description"),
+                "mod_authors": rootProject.property("mod_authors"),
+                "mod_license": rootProject.property("mod_license"),
+                "forge_version": libs.versions.forge.get(),
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_forge")
     }
 }
 

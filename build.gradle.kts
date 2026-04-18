@@ -1,5 +1,6 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 import net.fabricmc.loom.api.fabricapi.FabricApiExtension
+import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
     java
@@ -27,6 +28,7 @@ subprojects {
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
 
+    val libs = rootProject.extensions.getByName<LibrariesForLibs>("libs")
     base { archivesName.set(rootProject.property("archives_base_name") as String) }
 
     repositories {
@@ -47,12 +49,12 @@ subprojects {
         "minecraft"(libs.minecraft.get())
 
         // Uncomment if you want datagen (fabric)
-        // Only for the sake of compiling - not to be used for anything else!
-        "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
+        // IMPORTANT: Only for the sake of compiling - not to be used for anything else!
+        // "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
 
         "mappings"(loom.layered() {
             officialMojangMappings()
-            "parchment"("org.parchmentmc.data:parchment-${mcVersion}:${libs.versions.parchment.get()}@zip")
+            parchment("org.parchmentmc.data:parchment-${mcVersion}:${libs.versions.parchment.get()}@zip")
         })
     }
 

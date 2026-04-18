@@ -8,9 +8,11 @@ architectury {
 }
 
 fabricApi {
+    /* Uncomment if you want datagen
     configureDataGeneration {
         client = true
     }
+     */
 }
 
 configurations {
@@ -29,28 +31,32 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation("${libs.fabric.loader.get()}")
+    modImplementation("${libs.fabric.api.get()}")
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
-    modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
 
-    modImplementation "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
+    // Fabric dependencies go here
+    //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Fabric")
+    //modImplementation("dev.architectury:architectury-fabric:${libs.versions.arch.api.get()}")
+    //modImplementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+
+    modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }
 
 processResources {
-    inputs.property 'mod_version', project.mod_version
-    inputs.property 'minecraft_version', project.minecraft_version
-    inputs.property 'fabric_loader_version', project.fabric_loader_version
-    inputs.property 'architectury_api_version', project.architectury_api_version
-
     filesMatching('fabric.mod.json') {
-        expand mod_version: inputs.properties.mod_version,
-                minecraft_version: inputs.properties.minecraft_version,
-                architectury_api_version: inputs.properties.architectury_api_version,
-                fabric_loader_version: inputs.properties.fabric_loader_version
+        expand "mod_id": rootProject.property("mod_id"),
+                "mod_name": rootProject.property("mod_name"),
+                "mod_version": rootProject.property("mod_version"),
+                "mod_description": rootProject.property("mod_description"),
+                "mod_authors": rootProject.property("mod_authors"),
+                "mod_license": rootProject.property("mod_license"),
+                "fabric_loader_version": libs.versions.fabric.loader.get(),
+                "fabric_api_version": libs.versions.fabric.api.get(),
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric")
     }
 }
 
