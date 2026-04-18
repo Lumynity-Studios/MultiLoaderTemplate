@@ -9,8 +9,6 @@ plugins {
 }
 
 val mcVersion = libs.versions.minecraft.get()
-val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
-val fabricApi = project.extensions.getByName<FabricApiExtension>("fabricApi")
 
 architectury {
     minecraft = mcVersion
@@ -20,16 +18,16 @@ allprojects {
     group = rootProject.property("maven_group") as String
     version = rootProject.property("mod_version") as String
 
-    base { archivesName.set(rootProject.property("archives_base_name") as String) }
-
     repositories {
     }
 }
 
 subprojects {
     apply(plugin = "java")
-    apply(plugin = "${libs.plugins.arch.loom}")
-    apply(plugin = "${libs.plugins.arch.plugin}")
+    apply(plugin = "dev.architectury.loom")
+    apply(plugin = "architectury-plugin")
+
+    base { archivesName.set(rootProject.property("archives_base_name") as String) }
 
     repositories {
         maven("https://maven.parchmentmc.org")
@@ -41,15 +39,16 @@ subprojects {
         maven("https://maven.terraformersmc.com/")
     }
 
+    val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
+    val fabricApi = project.extensions.getByName<FabricApiExtension>("fabricApi")
     loom.silentMojangMappingsLicense()
 
     dependencies {
         "minecraft"(libs.minecraft.get())
 
-        /* Uncomment if you want datagen (fabric)
+        // Uncomment if you want datagen (fabric)
         // Only for the sake of compiling - not to be used for anything else!
         "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
-         */
 
         "mappings"(loom.layered() {
             officialMojangMappings()
@@ -80,14 +79,5 @@ subprojects {
     tasks.withType<Jar>().configureEach {
         archiveBaseName.set(rootProject.property("archives_base_name") as String)
         archiveVersion.set(project.version.toString())
-    }
-
-    // From this comment and below: TO FIX
-    tasks.matching { it.name == "shadowJar" }.configureEach {
-        if (hasProperty("archiveBaseName")) {
-            // Gradle is complaining abt this - TO FIX
-            it.archiveBaseName.set(rootProject.property("archives_base_name"))
-            it.archiveVersion.set(project.version.toString())
-        }
     }
 }
