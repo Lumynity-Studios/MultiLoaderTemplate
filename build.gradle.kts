@@ -12,7 +12,7 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "idea")
 
-    version = "${rootProject.property("mod_version")}+${mcVersion}"
+    version = "${rootProject.property("mod_version")}+mc${mcVersion}"
     group = rootProject.property("maven_group") as String
 
     base {
@@ -25,6 +25,9 @@ allprojects {
         maven("https://maven.fabricmc.net")
         maven("https://maven.neoforged.net/releases")
         maven("https://maven.minecraftforge.net")
+        maven("https://repo.spongepowered.org/repository/maven-public/")
+        maven("https://maven.bawnorton.com/releases")
+        maven("https://maven.enjarai.dev/mirrors")
         maven("https://api.modrinth.com/maven")
     }
 

@@ -8,6 +8,10 @@ base {
 
 val shadowCommon by configurations.getting
 
+repositories {
+    maven("https://maven.terraformersmc.com/")
+}
+
 dependencies {
     minecraft(libs.minecraft.get())
     implementation(libs.fabric.loader.get())
@@ -19,8 +23,14 @@ dependencies {
 
     // Fabric dependencies go here
     //implementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Fabric")
-    //implementation("dev.architectury:architectury-fabric:${rootProject.property("architectury_api")}")
+    //implementation("dev.architectury:architectury-fabric:${libs.versions.arch.api.get()}")
     //implementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+
+    implementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
+
+    // Fabric Loader has MixinExtras built-in since 0.15.0 but not MixinSquared
+    //include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${libs.versions.mixinextras.get()}")!!)!!)
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
 }
 
 tasks {

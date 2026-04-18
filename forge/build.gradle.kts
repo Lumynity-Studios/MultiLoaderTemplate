@@ -50,7 +50,11 @@ dependencies {
     // Forge dependencies go here
     // LumynLib doesn't support Forge since 1.21.1
     // Architectury API doesn't support Forge since 1.20.4
-    //implementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+    //implementation("com.github.glitchfiend:TerraBlender-forge:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+
+    // Forge mainlines MixinExtras since 1.21.10 but not MixinSquared
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)
+    "jarJar"("com.github.bawnorton.mixinsquared:mixinsquared-forge:${libs.versions.mixinsquared.get()}")
 }
 
 tasks {

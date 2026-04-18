@@ -50,8 +50,12 @@ dependencies {
 
     // NeoForge dependencies go here
     //implementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-NeoForge")
-    //implementation("dev.architectury:architectury-neoforge:${rootProject.property("architectury_api")}")
+    //implementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
     //implementation("com.github.glitchfiend:TerraBlender-neoforge:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+
+    // NeoForge mainlines MixinExtras since 1.21.1 but not MixinSquared
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)
+    jarJar("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${libs.versions.mixinsquared.get()}")
 }
 
 tasks {

@@ -11,6 +11,9 @@ fabric_loader = "0.19.2"
 fabric_api = "0.146.0+26.1.2"
 fabric_loom = "1.16-SNAPSHOT"
 
+# https://github.com/architectury/architectury-api
+arch_api = "20.0.1"
+
 # https://projects.neoforged.net/neoforged/moddevgradle
 moddevgradle = "2.0.141"
 
@@ -21,6 +24,11 @@ forge_jarjar = "0.2.3"
 
 # https://github.com/GradleUp/shadow/releases
 shadow = "9.4.1"
+
+# https://github.com/LlamaLad7/MixinExtras/releases
+mixinextras = "0.5.4"
+# https://github.com/Bawnorton/MixinSquared/releases
+mixinsquared = "0.3.3"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
