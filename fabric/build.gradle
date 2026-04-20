@@ -59,7 +59,8 @@ processResources {
                 "mod_license": rootProject.property("mod_license"),
                 "fabric_loader_version": libs.versions.fabric.loader.get(),
                 "fabric_api_version": libs.versions.fabric.api.get(),
-                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric")
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric"),
+                "architectury_api": libs.versions.arch.api.get()
     }
 }
 

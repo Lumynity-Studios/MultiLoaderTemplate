@@ -64,7 +64,8 @@ processResources {
                 "group": rootProject.property("maven_group"),
                 "quilt_loader_version": libs.versions.quilt.loader.get(),
                 "quilt_api_version": libs.versions.quilt.api.get(),
-                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric")
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric"),
+                "architectury_api": libs.versions.arch.api.get()
     }
 }
 

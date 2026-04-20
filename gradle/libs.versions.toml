@@ -9,7 +9,8 @@ arch_api = "9.2.14"
 
 # https://files.minecraftforge.net/net/minecraftforge/forge/
 # You can bump the version up if you don't plan on keeping compatibility with NeoForge on 1.20.1
-forge = "1.20.1-47.1.47"
+forge_loader = "1.20.1-47.1.47"
+forge = "47.1.47"
 
 # https://fabricmc.net/develop
 fabric_loader = "0.17.1"
@@ -32,7 +33,7 @@ fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_l
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 quilt_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilt_api" }
-forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
+forge = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
 
 [plugins]
 arch_loom = { id = "dev.architectury.loom", version.ref = "arch_loom" }

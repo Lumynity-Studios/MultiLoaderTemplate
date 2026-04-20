@@ -76,8 +76,9 @@ processResources {
                 "mod_description": rootProject.property("mod_description"),
                 "mod_authors": rootProject.property("mod_authors"),
                 "mod_license": rootProject.property("mod_license"),
-                "forge_version": libs.versions.forge.get(),
-                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_forge")
+                "forge_version": libs.versions.forge.asProvider().get(),
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_forge"),
+                "architectury_api": libs.versions.arch.api.get()
     }
 }
 
