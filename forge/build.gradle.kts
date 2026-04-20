@@ -40,7 +40,7 @@ jarJar.register()
 val shadowCommon by configurations.getting
 
 dependencies {
-    implementation(minecraft.dependency("net.minecraftforge:forge:${libs.versions.minecraft.get()}-${libs.versions.forge.asProvider().get()}"))
+    implementation(minecraft.dependency("${libs.forge.get()}"))
     annotationProcessor("org.spongepowered:mixin:0.8.7:processor")
 
     shadowCommon(implementation(project(":common")) {
