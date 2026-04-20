@@ -32,8 +32,8 @@ subprojects {
     base { archivesName.set(rootProject.property("archives_base_name") as String) }
 
     repositories {
-        maven("https://maven.parchmentmc.org")
-        maven("https://maven.minecraftforge.net/")
+        maven("https://maven.parchmentmc.org") // Mappings
+        maven("https://maven.minecraftforge.net/") // Forge
         maven("https://repo.spongepowered.org/repository/maven-public/")
         maven("https://maven.bawnorton.com/releases") // MixinSqured
         maven("https://maven.enjarai.dev/mirrors") // MixinSqured

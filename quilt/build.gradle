@@ -1,9 +1,3 @@
-
-/*
-                                                         TODO: FIGURE OUT QUILT DATAGEN
-*/
-
-
 plugins {
     id('com.gradleup.shadow')
 }
@@ -29,7 +23,7 @@ configurations {
         canBeConsumed = false
     }
 }
-// Exclude Fabric Loader from configuration so there's no duplicate mod errors
+// Exclude Fabric Loader from configuration to avoid "Duplicate mod: Fabric Loader" error
 configurations.configureEach {
     exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
@@ -47,6 +41,7 @@ dependencies {
     //modImplementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}") {
+        // Exclude Fabric API from running along side Mod Menu to avoid "Duplicate mod: Fabric API" error
         exclude(group: "net.fabricmc.fabric-api")
     }
 

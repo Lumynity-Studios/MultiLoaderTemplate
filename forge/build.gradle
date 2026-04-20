@@ -51,8 +51,8 @@ configurations {
 }
 
 dependencies {
-    forge("net.minecraftforge:forge:${libs.versions.minecraft.get()}-${libs.versions.forge.get()}")
-    modImplementation("net.minecraftforge:forge:${libs.versions.minecraft.get()}-${libs.versions.forge.get()}")
+    forge("${libs.forge.get()}")
+    modImplementation("${libs.forge.get()}")
 
     // Forge dependencies go here
     //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Forge")

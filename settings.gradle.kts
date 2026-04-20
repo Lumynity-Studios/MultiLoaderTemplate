@@ -9,6 +9,6 @@ pluginManagement {
     }
 }
 
-include("common", "fabric", "quilt", "forge", "neoforge")
+include("common", "fabric", "quilt", "forge")
 
 rootProject.name = "ExampleMod"
