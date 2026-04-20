@@ -59,7 +59,6 @@ dependencies {
     //modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
     //modImplementation("com.github.glitchfiend:TerraBlender-forge:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 
-
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}"))
     implementation(include("io.github.llamalad7:mixinextras-forge:${libs.versions.mixinextras.get()}"))
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))
