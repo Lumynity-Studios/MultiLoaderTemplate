@@ -25,9 +25,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "lumynlib"
+modId = "architectury"
 type = "required"
-versionRange = "[1,)"
+versionRange = "[${architectury_api},)"
 ordering = "NONE"
 side = "BOTH"
 

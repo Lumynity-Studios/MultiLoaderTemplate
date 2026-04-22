@@ -90,6 +90,7 @@ tasks {
                 "mod_license" to rootProject.property("mod_license"),
                 "forge_version" to libs.versions.forge.asProvider().get(),
                 "minecraft_version_constraint" to rootProject.property("minecraft_version_constraint_forge"),
+                "architectury_api" to libs.versions.arch.api.get()
             ))
         }
     }

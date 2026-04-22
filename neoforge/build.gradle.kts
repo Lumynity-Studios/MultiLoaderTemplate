@@ -72,6 +72,7 @@ tasks {
                 "mod_license" to rootProject.property("mod_license"),
                 "neoforge_version" to libs.versions.neoforge.get(),
                 "minecraft_version_constraint" to rootProject.property("minecraft_version_constraint_forge"),
+                "architectury_api" to libs.versions.arch.api.get()
             ))
         }
     }
