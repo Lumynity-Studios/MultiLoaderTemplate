@@ -6,7 +6,7 @@ Any dependencies you want to add should be done in their corresponding submodule
 respective mod loaders.
 
 ## Developer Notes
-- The output JAR always follows the format of `ModName-version+mc[minecraft_version]-Platform.jar`, for example `AlwaysShield-1.2.1+mc26.1-Fabric.jar`.
+- The output JAR always follows the format of `ModName-version+mc[minecraft_version]-Platform.jar`, for example `AlwaysShield-1.2.1+mc26.1.2-Fabric.jar`.
   - If there exists a classifier, that is not your intended output JAR
 - If you want to compile a JAR for all mods, you should run the `build` or `assemble` task.
 - To remove any loader from the project, simply remove it from `include("common", "fabric", "quilt", "forge")` in `settings.gradle.kts`
