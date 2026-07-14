@@ -11,4 +11,5 @@ respective mod loaders.
 - If you want to compile a JAR for all mods, you should run the `build` or `assemble` task.
 - Launching Forge and NeoForge in a development environment doesn't work.
   Some common resources such as mixins don't carry over to Forge when running development environment which makes Forge refuse to run.
-- If you entirely don't want datagen, you can delete `architectury.common.json`, `examplemod.accesswidener`, and `template.accesswidener` files.
+- If you entirely don't want datagen, you can delete `architectury.common.json`, `examplemod.accesswidener`, 
+  and `template.accesswidener` files and datagen related code in buildscripts.
