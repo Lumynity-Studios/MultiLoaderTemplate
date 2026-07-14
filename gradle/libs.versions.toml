@@ -8,19 +8,18 @@ arch_plugin = "3.4-SNAPSHOT"
 arch_api = "9.2.14"
 
 # https://files.minecraftforge.net/net/minecraftforge/forge/
-# You can bump the version up if you don't plan on keeping compatibility with NeoForge on 1.20.1
-forge_loader = "1.20.1-47.1.47"
-forge = "47.1.47"
+forge_loader = "1.20.1-47.4.20"
+forge = "47.4.20"
 
 # https://fabricmc.net/develop
-fabric_loader = "0.17.1"
+fabric_loader = "0.18.3"
 fabric_api = "0.92.8+1.20.1"
-# https://wiki.quiltmc.org/en
-quilt_loader = "0.30.0-beta.7"
-quilt_api = "7.7.0+0.92.2-1.20.1"
 
 # https://github.com/GradleUp/shadow/releases
 shadow = "8.3.6"
+
+# https://github.com/modmuss50/mod-publish-plugin
+publish = "2.1.1"
 
 # https://github.com/LlamaLad7/MixinExtras/releases
 mixinextras = "0.5.4"
@@ -31,11 +30,10 @@ mixinsquared = "0.3.3"
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
-quilt_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilt_api" }
 forge = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
 
 [plugins]
 arch_loom = { id = "dev.architectury.loom", version.ref = "arch_loom" }
 arch_plugin = { id = "architectury-plugin", version.ref = "arch_plugin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "publish" }

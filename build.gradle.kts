@@ -49,9 +49,9 @@ subprojects {
 
         // Uncomment if you want datagen (fabric)
         // IMPORTANT: Only for the sake of compiling - not to be used for anything else!
-        // "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
+        "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
 
-        "mappings"(loom.layered() {
+        "mappings"(loom.layered {
             officialMojangMappings()
             parchment("org.parchmentmc.data:parchment-${mcVersion}:${libs.versions.parchment.get()}@zip")
         })
@@ -69,7 +69,7 @@ subprojects {
     val detectedPlatform = when {
         project.name.contains("fabric", ignoreCase = true) -> "Fabric"
         project.name.contains("forge", ignoreCase = true) -> "Forge"
-        else -> null
+        else -> "Common"
     }
     project.version = if (detectedPlatform != null) {
         "${rootProject.property("mod_version")}+mc${mcVersion}-${detectedPlatform}"

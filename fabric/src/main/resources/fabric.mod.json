@@ -11,10 +11,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.lumynity.examplemod.fabric.client.FabricClient"
+      "net.lumynitystudios.examplemod.fabric.client.FabricClient"
     ],
     "main": [
-      "net.lumynity.examplemod.fabric.ExampleModFabric"
+      "net.lumynitystudios.examplemod.fabric.ExampleModFabric"
     ]
   },
   "mixins": [
@@ -25,6 +25,7 @@
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",
     "minecraft": "${minecraft_version_constraint}",
-    "architectury": ">=${architectury_api}"
+    "architectury": ">=${architectury_api}",
+    "corelibs": "*"
   }
 }

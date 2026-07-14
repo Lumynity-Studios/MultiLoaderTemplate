@@ -1,6 +1,6 @@
-package net.lumynity.examplemod.forge;
+package net.lumynitystudios.examplemod.forge;
 
-import net.lumynity.examplemod.ExampleMod;
+import net.lumynitystudios.examplemod.ExampleMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;

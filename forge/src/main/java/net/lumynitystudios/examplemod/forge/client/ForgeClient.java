@@ -1,6 +1,6 @@
-package net.lumynity.examplemod.forge.client;
+package net.lumynitystudios.examplemod.forge.client;
 
-import net.lumynity.examplemod.client.CommonClient;
+import net.lumynitystudios.examplemod.client.CommonClient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

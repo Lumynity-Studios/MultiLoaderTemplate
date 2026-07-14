@@ -117,6 +117,7 @@ run/
 run_test/
 run_server/
 !run_test/.gitkeep
+.cache/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar

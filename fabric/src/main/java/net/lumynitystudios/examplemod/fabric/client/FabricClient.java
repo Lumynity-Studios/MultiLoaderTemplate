@@ -1,8 +1,7 @@
-package net.lumynity.examplemod.fabric.client;
-
-import net.lumynity.examplemod.client.CommonClient;
+package net.lumynitystudios.examplemod.fabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.lumynitystudios.examplemod.client.CommonClient;
 
 public class FabricClient implements ClientModInitializer {
     @Override

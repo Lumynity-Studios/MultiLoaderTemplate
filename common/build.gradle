@@ -1,4 +1,3 @@
-/* Uncomment if you want datagen
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -6,17 +5,16 @@ import org.objectweb.asm.tree.ClassNode
 import java.lang.reflect.Modifier
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
-*/
 
 architectury {
     common rootProject.enabled_platforms.split(',')
 }
 
-/* Uncomment if you want datagen
 loom {
     accessWidenerPath = file("src/main/resources/${rootProject.property("mod_id")}.accesswidener")
+
+    mixin.useLegacyMixinAp = true
 }
-*/
 
 dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations,
@@ -25,12 +23,10 @@ dependencies {
     modImplementation(libs.fabric.loader.get())
 
     // Common (Common/Fabric) dependencies go here
-    //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Fabric")
+    //modImplementation("maven.modrinth:millies-core-libs:${rootProject.property("corelibs")}-Fabric")
     //modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
-    //modImplementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 }
 
-/* Uncomment if you want datagen
 tasks.register('generateAccessWidener') {
     doLast {
         String accessWidener = "accessWidener\tv2\tnamed\n"
@@ -46,14 +42,14 @@ tasks.register('generateAccessWidener') {
             classes += map
         }
 
-        visitMethods(classes["net/minecraft/data/recipes/RecipeProvider"]) { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/recipes/RecipeProvider"] as ClassNode) { name, desc, owner ->
             if (it.name == "generate")
                 return
 
             accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitMethods(classes["net/minecraft/data/models/BlockModelGenerators"]) { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/models/BlockModelGenerators"] as ClassNode) { name, desc, owner ->
             if (desc == "()V")
             // Skip over methods that dont take any arguments, as they are specific to minecraft.
                 return
@@ -61,22 +57,22 @@ tasks.register('generateAccessWidener') {
             accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitMethods(classes["net/minecraft/data/models/ItemModelGenerators"]) { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/models/ItemModelGenerators"] as ClassNode) { name, desc, owner ->
             accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitMethods(classes["net/minecraft/data/loot/BlockLootSubProvider"]) { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/loot/BlockLootSubProvider"] as ClassNode) { name, desc, owner ->
             accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
         classes.values().forEach { classNode ->
-            visitFinalMethods(classNode) { name, desc, owner ->
+            visitFinalMethods(classNode as ClassNode) { name, desc, owner ->
                 if (name != "getName" || desc != "()Ljava/lang/String;") {
                     // Not the method we are after
                     return
                 }
 
-                if (!hasAncestor(classNode, classes, "net/minecraft/data/DataProvider")) {
+                if (!hasAncestor(classNode as ClassNode, classes, "net/minecraft/data/DataProvider")) {
                     // Not a descendant of DataProvider
                     return
                 }
@@ -158,4 +154,3 @@ def hasAncestor(ClassNode classNode, Map<String, ClassNode> classes, String ance
         }
     }
 }
-*/

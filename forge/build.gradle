@@ -1,8 +1,8 @@
 plugins {
     id("com.gradleup.shadow")
+    alias(libs.plugins.publish)
 }
 
-/* Uncomment if you want datagen
 def generatedResources = file("src/generated")
 
 sourceSets {
@@ -10,7 +10,6 @@ sourceSets {
         resources.srcDir generatedResources
     }
 }
- */
 
 loom {
     forge {
@@ -18,15 +17,16 @@ loom {
                 "${rootProject.property("mod_id")}-forge.mixins.json"
     }
 
+    mixin {
+        useLegacyMixinAp = true
+    }
 
     runs {
-        /* Uncomment if you want datagen
         data {
             data()
             programArgs "--all", "--mod", "${rootProject.property("mod_id")}"
             programArgs "--output", generatedResources.absolutePath
         }
-         */
     }
 }
 
@@ -55,9 +55,8 @@ dependencies {
     modImplementation("${libs.forge.get()}")
 
     // Forge dependencies go here
-    //modImplementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Forge")
+    //modImplementation("maven.modrinth:millies-core-libs:${rootProject.property("corelibs")}-Forge")
     //modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
-    //modImplementation("com.github.glitchfiend:TerraBlender-forge:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}"))
     implementation(include("io.github.llamalad7:mixinextras-forge:${libs.versions.mixinextras.get()}"))
@@ -89,4 +88,19 @@ shadowJar {
 
 remapJar {
     inputFile.set shadowJar.archiveFile
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    modLoaders.add("forge")
+    // STABLE, BETA, ALPHA
+    type = STABLE
+
+    modrinth {
+        projectId = "abcdefg"
+        accessToken = property("modrinth_token")
+        minecraftVersions.add("1.20.1")
+
+        changelog = "See full changelog: [github.com/Lumynity-Studios/](https://github.com/Lumynity-Studios/REPOSITORY/blob/rep-info/.Changelogs/)" + rootProject.property("mod_version") + "-Changelog.md"
+    }
 }

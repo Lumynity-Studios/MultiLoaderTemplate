@@ -1,4 +1,4 @@
-package net.lumynity.examplemod;
+package net.lumynitystudios.examplemod;
 
 import net.minecraft.resources.ResourceLocation;
 
