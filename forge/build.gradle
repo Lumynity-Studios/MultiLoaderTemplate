@@ -100,7 +100,8 @@ publishMods {
         projectId = "abcdefg"
         accessToken = property("modrinth_token")
         minecraftVersions.add("1.20.1")
+        enviroment = CLIENT_AND_SERVER
 
-        changelog = "See full changelog: [github.com/Lumynity-Studios/](https://github.com/Lumynity-Studios/REPOSITORY/blob/rep-info/.Changelogs/)" + rootProject.property("mod_version") + "-Changelog.md"
+        changelog = "See full changelog: [github.com/Lumynity-Studios/](https://github.com/Lumynity-Studios/REPOSITORY/blob/rep-info/.Changelogs/${rootProject.property("mod_version")}-Changelog.md"
     }
 }

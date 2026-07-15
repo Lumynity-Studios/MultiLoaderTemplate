@@ -83,6 +83,7 @@ publishMods {
         projectId = "abcdefg"
         accessToken = property("modrinth_token")
         minecraftVersions.add("1.20.1")
+        enviroment = CLIENT_AND_SERVER
         requires("fabric-api")
 
         def changelogFile = rootProject.file(".Changelogs/${rootProject.property("mod_version")}-Changelog.md")
