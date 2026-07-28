@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.lumynity.examplemod.mixin",
+  "package": "net.lumynitystudios.examplemod.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
