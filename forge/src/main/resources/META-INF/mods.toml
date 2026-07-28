@@ -25,8 +25,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "architectury"
+modId = "corelibs"
 mandatory = true
-versionRange = "[${architectury_api},)"
+versionRange = "[${corelibs},)"
 ordering = "NONE"
 side = "BOTH"

@@ -5,14 +5,13 @@ parchment = "2023.09.03"
 # -- insert architectury docs link --
 arch_loom = "1.13-SNAPSHOT"
 arch_plugin = "3.4-SNAPSHOT"
-arch_api = "9.2.14"
 
 # https://files.minecraftforge.net/net/minecraftforge/forge/
 forge_loader = "1.20.1-47.4.20"
 forge = "47.4.20"
 
 # https://fabricmc.net/develop
-fabric_loader = "0.18.3"
+fabric_loader = "0.18.4"
 fabric_api = "0.92.8+1.20.1"
 
 # https://github.com/GradleUp/shadow/releases
