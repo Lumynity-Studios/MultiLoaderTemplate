@@ -29,14 +29,21 @@ subprojects {
     val libs = root.extensions.getByName<LibrariesForLibs>("libs")
     base.archivesName.set(baseName)
 
+    // All repositories used should be listed here
     repositories {
+        mavenCentral()
         maven("https://maven.parchmentmc.org") // Mappings
+        maven("https://maven.fabricmc.net") // Fabric
+        maven("https://maven.neoforged.net/releases") // NeoForge
         maven("https://maven.minecraftforge.net/") // Forge
+
         maven("https://repo.spongepowered.org/repository/maven-public/")
         maven("https://maven.bawnorton.com/releases") // MixinSqured
         maven("https://maven.enjarai.dev/mirrors") // MixinSqured
+
         maven("https://maven.terraformersmc.com/") // Mod Menu
-        maven("https://maven.lumynitystudios.net/")
+        maven("https://api.modrinth.com/maven") // Modrinth
+        maven("https://maven.lumynitystudios.net/") // Lumynity Studios' mods
     }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
