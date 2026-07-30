@@ -59,10 +59,11 @@ dependencies {
     // Forge dependencies go here
     implementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Forge")
 
+    // Forge doesn't mainline MixinExtras until 1.21.11, so here we need it
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}")!!)
     implementation(include("io.github.llamalad7:mixinextras-forge:${libs.versions.mixinextras.get()}")!!)
-    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)
-    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${libs.versions.mixinsquared.get()}")!!)
+    //compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)
+    //implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${libs.versions.mixinsquared.get()}")!!)
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
     "shadowBundle"(project(":common", "transformProductionForge"))
@@ -97,8 +98,7 @@ publishMods {
     file = tasks.remapJar.get().archiveFile
     modLoaders.add("forge")
 
-    val changelogFile = root.file(".Changelogs/${modId}-Changelog.md")
-    changelog = if (changelogFile.exists()) changelogFile.readText(Charsets.UTF_8) else "No changelog found"
+    changelog = readChangelogFromBranch("origin/rep-info", ".Changelogs/${modVersion}-Changelog.md")
 
     modrinth {
         accessToken = property("modrinth_token") as String
@@ -108,6 +108,8 @@ publishMods {
         environment = CLIENT_AND_SERVER
         // STABLE, BETA, ALPHA
         type = STABLE
+
+        requires("millies-core-libs")
     }
 
     curseforge {
@@ -119,5 +121,7 @@ publishMods {
         server = true
         // STABLE, BETA, ALPHA
         type = STABLE
+
+        requires("millies-core-libs")
     }
 }

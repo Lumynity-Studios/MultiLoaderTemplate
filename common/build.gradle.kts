@@ -18,4 +18,6 @@ dependencies {
 
     // Common (Common/Fabric) dependencies go here
     modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric") // Change to -Common with 0.0.2a
+
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)!!)
 }

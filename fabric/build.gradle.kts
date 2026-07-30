@@ -44,8 +44,7 @@ dependencies {
     modImplementation("com.terraformersmc:modmenu:${root.property("mod_menu")}")
 
     // Fabric Loader has MixinExtras built-in since 0.15.0 but not MixinSquared
-    //include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${libs.versions.mixinextras.get()}")!!)!!)
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
+    //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
     "shadowBundle"(project(":common", "transformProductionFabric"))
@@ -81,8 +80,7 @@ publishMods {
     file = tasks.remapJar.get().archiveFile
     modLoaders.add("fabric")
 
-    val changelogFile = root.file(".Changelogs/${modVersion}-Changelog.md")
-    changelog = if (changelogFile.exists()) changelogFile.readText(Charsets.UTF_8) else "No changelog found"
+    changelog = readChangelogFromBranch("origin/rep-info", ".Changelogs/${modVersion}-Changelog.md")
 
     modrinth {
         accessToken = property("modrinth_token") as String
@@ -93,7 +91,7 @@ publishMods {
         // STABLE, BETA, ALPHA
         type = STABLE
 
-        requires("fabric-api")
+        requires("fabric-api", "millies-core-libs")
     }
 
     curseforge {
@@ -106,6 +104,6 @@ publishMods {
         // STABLE, BETA, ALPHA
         type = STABLE
 
-        requires("fabric-api")
+        requires("fabric-api", "millies-core-libs")
     }
 }

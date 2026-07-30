@@ -33,3 +33,20 @@ val Project.mcVersion: String
         .find("libs").get()
         .findVersion("minecraft").get()
         .requiredVersion
+
+fun Project.readChangelogFromBranch(branch: String, path: String): String {
+    return try {
+        val output = providers.exec {
+            commandLine("git", "show", "$branch:$path")
+            isIgnoreExitValue = true
+        }
+
+        if (output.result.get().exitValue == 0) {
+            output.standardOutput.asText.get().trim()
+        } else {
+            "No changelog found"
+        }
+    } catch (e: Exception) {
+        "No changelog found"
+    }
+}
