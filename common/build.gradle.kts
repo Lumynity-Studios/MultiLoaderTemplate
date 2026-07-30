@@ -1,20 +1,20 @@
+import multiloader.*
+
 plugins {
     alias(libs.plugins.fabric.loom)
 }
 
-base {
-    archivesName.set("${archivesName.get()}")
+loom {
+    accessWidenerPath.set(root.file("fabric/src/main/resources/${modId}.accesswidener"))
 }
 
 dependencies {
     minecraft(libs.minecraft.get())
+    // Do NOT use anything from Fabric Loader
     implementation(libs.fabric.loader.get())
 
     // Common (Fabric/Common) dependencies go here
-    //implementation("maven.modrinth:lumynlib:${rootProject.property("lumynlib")}-Fabric")
-    //implementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
-    //implementation("com.github.glitchfiend:TerraBlender-fabric:${libs.versions.minecraft.get()}-${rootProject.property("terrablender")}")
+    //implementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric")
 
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${libs.versions.mixinextras.get()}")!!)!!)
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
+    //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
 }

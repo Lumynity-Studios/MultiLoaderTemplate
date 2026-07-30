@@ -1,38 +1,68 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import multiloader.*
 
 plugins {
     java
     alias(libs.plugins.shadow) apply false
+    alias(libs.plugins.fabric.loom) apply false // Gradle wants it. Sure.
     id("idea")
+    id("multiloader-extensions")
 }
 
-val mcVersion = libs.versions.minecraft.get()
-
 allprojects {
+    apply(plugin = "multiloader-extensions")
+
+    repositories {}
+}
+
+subprojects {
     apply(plugin = "java")
     apply(plugin = "idea")
+    apply(plugin = "com.gradleup.shadow")
 
-    version = "${rootProject.property("mod_version")}+mc${mcVersion}"
-    group = rootProject.property("maven_group") as String
+    base.archivesName.set(baseName)
 
-    base {
-        archivesName.set(rootProject.property("archives_base_name") as String)
-    }
-
+    // All repositories used should be listed here
     repositories {
-        // All repositories used should be listed here
         mavenCentral()
-        maven("https://maven.fabricmc.net")
-        maven("https://maven.neoforged.net/releases")
-        maven("https://maven.minecraftforge.net")
+        maven("https://maven.fabricmc.net") // Fabric
+        maven("https://maven.neoforged.net/releases") // NeoForge
+        maven("https://maven.minecraftforge.net/") // Forge
+
         maven("https://repo.spongepowered.org/repository/maven-public/")
-        maven("https://maven.bawnorton.com/releases")
-        maven("https://maven.enjarai.dev/mirrors")
-        maven("https://api.modrinth.com/maven")
+        maven("https://maven.bawnorton.com/releases") // MixinSqured
+        maven("https://maven.enjarai.dev/mirrors") // MixinSqured
+
+        maven("https://maven.terraformersmc.com/") // Mod Menu
+        maven("https://api.modrinth.com/maven") // Modrinth
+        maven("https://maven.lumynitystudios.net/") // Lumynity Studios' mods
     }
 
     val targetJavaVersion = 25
 
+    java {
+        val javaVersion = JavaVersion.toVersion(targetJavaVersion)
+        if (JavaVersion.current() < javaVersion) {
+            toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+        }
+    }
+
+    // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+    idea {
+        module {
+            isDownloadSources = true
+            isDownloadJavadoc = true
+        }
+    }
+
+    val detectedPlatform = when {
+        project.name.contains("fabric", ignoreCase = true) -> "Fabric"
+        project.name.contains("neoforge", ignoreCase = true) -> "NeoForge"
+        else -> "Common"
+    }
+    project.version = "${modVersion}+mc${mcVersion}-${detectedPlatform}"
+
+    val shadowCommon by configurations.creating
     tasks {
         withType<JavaCompile>().configureEach {
             options.encoding = "UTF-8"
@@ -49,38 +79,16 @@ allprojects {
             from("LICENSE") {
                 rename { it }
             }
-        }
-    }
-
-    java {
-        val javaVersion = JavaVersion.toVersion(targetJavaVersion)
-        if (JavaVersion.current() < javaVersion) {
-            toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-        }
-    }
-
-    // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
-    idea {
-        module {
-            isDownloadSources = true
-            isDownloadJavadoc = true
-        }
-    }
-}
-
-subprojects {
-    apply(plugin = "com.gradleup.shadow")
-
-    val shadowCommon by configurations.creating
-
-    tasks {
-        jar {
             archiveClassifier.set("slim")
+            archiveBaseName.set(baseName)
+            archiveVersion.set(project.version.toString())
         }
 
         named<ShadowJar>("shadowJar") {
             configurations = listOf(shadowCommon)
             archiveClassifier.set(null)
+            archiveBaseName.set(baseName)
+            archiveVersion.set(project.version.toString())
         }
     }
 }

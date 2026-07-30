@@ -4,26 +4,26 @@ minecraft = "26.1.2"
 # https://files.minecraftforge.net/net/minecraftforge/forge/
 forge = "26.1.2-64.0.4"
 # https://projects.neoforged.net/neoforged/neoforge
-neoforge = "26.1.2.12-beta"
+neoforge = "26.1.2.92"
 
 # https://fabricmc.net/develop
-fabric_loader = "0.19.2"
-fabric_api = "0.146.0+26.1.2"
-fabric_loom = "1.16-SNAPSHOT"
-
-# https://github.com/architectury/architectury-api
-arch_api = "20.0.1"
+fabric_loader = "0.19.3"
+fabric_api = "0.155.2+26.1.2"
+fabric_loom = "1.17-SNAPSHOT"
 
 # https://projects.neoforged.net/neoforged/moddevgradle
-moddevgradle = "2.0.141"
+moddevgradle = "2.0.143"
 
 # https://files.minecraftforge.net/net/minecraftforge/forgegradle/index.html
-forge_gradle = "7.0.20"
+forge_gradle = "7.0.31"
 # https://files.minecraftforge.net/net/minecraftforge/jarjar-gradle/index.html
 forge_jarjar = "0.2.3"
 
 # https://github.com/GradleUp/shadow/releases
 shadow = "9.4.1"
+
+# https://github.com/modmuss50/mod-publish-plugin
+publish = "2.2.0"
 
 # https://github.com/LlamaLad7/MixinExtras/releases
 mixinextras = "0.5.4"
@@ -32,10 +32,8 @@ mixinsquared = "0.3.3"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-
 forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
 
 [plugins]
@@ -44,3 +42,4 @@ moddevgradle = { id = "net.neoforged.moddev", version.ref = "moddevgradle" }
 forge_gradle = { id = "net.minecraftforge.gradle", version.ref = "forge_gradle" }
 forge_jarjar = { id = "net.minecraftforge.jarjar", version.ref = "forge_jarjar" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "publish" }
