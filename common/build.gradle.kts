@@ -6,8 +6,6 @@ architectury {
 
 loom {
     accessWidenerPath.set(file("src/main/resources/${modId}.accesswidener"))
-
-    mixin.useLegacyMixinAp.set(true)
 }
 
 dependencies {
@@ -17,7 +15,8 @@ dependencies {
     modImplementation(libs.fabric.loader.get())
 
     // Common (Common/Fabric) dependencies go here
-    modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric") // Change to -Common with 0.0.2a
+    //modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric") // Change to -Common with 0.0.2a
 
+    // Fabric Loader (on which we depend on) has MixinExtras built-in since 0.15.0, but not MixinSquared
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)!!)
 }

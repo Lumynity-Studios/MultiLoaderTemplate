@@ -9,6 +9,6 @@ public class ExampleMod {
     public static void init() {}
 
     public static ResourceLocation asResource(String name) {
-        return new ResourceLocation(MODID, name);
+        return ResourceLocation.fromNamespaceAndPath(MODID, name);
     }
 }

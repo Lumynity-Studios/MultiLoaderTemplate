@@ -18,8 +18,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "forge"
-mandatory = true
+modId = "neoforge"
+type = "required"
 versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
@@ -30,3 +30,9 @@ mandatory = true
 versionRange = "[${corelibs},)"
 ordering = "NONE"
 side = "BOTH"
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[mixins]]
+config = "${mod_id}-neoforge.mixins.json"

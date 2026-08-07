@@ -1,18 +1,17 @@
 [versions]
-minecraft = "1.20.1"
-parchment = "2023.09.03"
+minecraft = "1.21.1"
+parchment = "2024.11.17"
 
 # -- insert architectury docs link --
-arch_loom = "1.13-SNAPSHOT"
-arch_plugin = "3.4-SNAPSHOT"
+arch_loom = "1.17-SNAPSHOT"
+arch_plugin = "3.5-SNAPSHOT"
 
-# https://files.minecraftforge.net/net/minecraftforge/forge/
-forge_loader = "1.20.1-47.4.20"
-forge = "47.4.20"
+# https://projects.neoforged.net/neoforged/neoforge
+neoforge = "21.1.223"
 
 # https://fabricmc.net/develop
-fabric_loader = "0.18.4"
-fabric_api = "0.92.8+1.20.1"
+fabric_loader = "0.19.3"
+fabric_api = "0.116.15+1.21.1"
 
 # https://github.com/GradleUp/shadow/releases
 shadow = "8.3.6"
@@ -29,7 +28,7 @@ mixinsquared = "0.3.3"
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-forge = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 [plugins]
 arch_loom = { id = "dev.architectury.loom", version.ref = "arch_loom" }

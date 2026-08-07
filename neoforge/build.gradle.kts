@@ -6,23 +6,18 @@ plugins {
 }
 
 val generatedResources = file("src/generated")
+val sharedGeneratedResources = file("../fabric/src/main/generated")
 
 sourceSets {
     main {
-        resources.srcDir(generatedResources)
+        // These data files are platform-independent. Fabric's 1.21 datagen
+        // serializes the current data formats, while NeoForge emits 1.20 paths
+        // and JSON schemas for the same providers.
+        resources.srcDir(sharedGeneratedResources)
     }
 }
 
 loom {
-    forge {
-        mixinConfig(
-            "${modId}.mixins.json",
-            "${modId}-forge.mixins.json"
-        )
-    }
-
-    mixin.useLegacyMixinAp = true
-
     runs {
         create("data") {
             data()
@@ -34,7 +29,7 @@ loom {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 configurations {
@@ -44,7 +39,7 @@ configurations {
     }
     named("compileClasspath") { extendsFrom(common) }
     named("runtimeClasspath") { extendsFrom(common) }
-    named("developmentForge") { extendsFrom(common) }
+    named("developmentNeoForge") { extendsFrom(common) }
 
     val shadowBundle by creating {
         isCanBeResolved = true
@@ -53,35 +48,32 @@ configurations {
 }
 
 dependencies {
-    forge(libs.forge.get())
-    modImplementation(libs.forge.get())
+    neoForge(libs.neoforge.get())
 
-    // Forge dependencies go here
-    implementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Forge")
+    // NeoForge dependencies go here
+    //modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-NeoForge")
 
-    // Forge doesn't mainline MixinExtras until 1.21.11, so here we need it
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}")!!)
-    implementation(include("io.github.llamalad7:mixinextras-forge:${libs.versions.mixinextras.get()}")!!)
+    // NeoForge mainlines MixinExtras since 20.2.84, but not MixinSquared
     //compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}")!!)
-    //implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${libs.versions.mixinsquared.get()}")!!)
+    //implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${libs.versions.mixinsquared.get()}")!!)
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
-    "shadowBundle"(project(":common", "transformProductionForge"))
+    "shadowBundle"(project(":common", "transformProductionNeoForge"))
 }
 
 tasks.processResources {
-    filesMatching("META-INF/mods.toml") {
-        expand(
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand(mapOf(
             "mod_id" to modId,
             "mod_name" to modName,
             "mod_version" to modVersion,
             "mod_description" to modDesc,
             "mod_authors" to modAuthor,
             "mod_license" to modLicense,
-            "forge_version" to libs.versions.forge.asProvider().get(),
+            "forge_version" to libs.versions.neoforge.get(),
             "minecraft_version_constraint" to root.property("minecraft_version_constraint_forge"),
             "corelibs" to root.property("corelibs")
-        )
+        ))
     }
 }
 
@@ -96,7 +88,7 @@ tasks.remapJar {
 
 publishMods {
     file = tasks.remapJar.get().archiveFile
-    modLoaders.add("forge")
+    modLoaders.add("neoforge")
 
     changelog = readChangelogFromBranch("origin/rep-info", ".Changelogs/${modVersion}-Changelog.md")
 

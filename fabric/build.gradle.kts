@@ -16,8 +16,6 @@ fabricApi {
     }
 }
 
-loom.mixin.useLegacyMixinAp = true
-
 configurations {
     val common by creating {
         isCanBeResolved = true
@@ -38,12 +36,12 @@ dependencies {
     modImplementation(libs.fabric.api.get())
 
     // Fabric dependencies go here
-    modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric")
+    //modImplementation("net.justmili:corelibs:${root.property("corelibs")}+mc${mcVersion}-Fabric")
 
     // Other
     modImplementation("com.terraformersmc:modmenu:${root.property("mod_menu")}")
 
-    // Fabric Loader has MixinExtras built-in since 0.15.0 but not MixinSquared
+    // Fabric Loader has MixinExtras built-in since 0.15.0, but not MixinSquared
     //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
@@ -52,7 +50,7 @@ dependencies {
 
 tasks.processResources {
     filesMatching("fabric.mod.json") {
-        expand(
+        expand(mapOf(
             "mod_id" to modId,
             "mod_name" to modName,
             "mod_version" to modVersion,
@@ -63,7 +61,7 @@ tasks.processResources {
             "fabric_api_version" to libs.versions.fabric.api.get(),
             "minecraft_version_constraint" to root.property("minecraft_version_constraint_fabric"),
             "corelibs" to root.property("corelibs")
-        )
+        ))
     }
 }
 

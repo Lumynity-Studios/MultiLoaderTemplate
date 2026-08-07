@@ -10,6 +10,6 @@ pluginManagement {
 }
 
 includeBuild("build-logic")
-include("common", "fabric", "forge")
+include("common", "fabric", "neoforge")
 
 rootProject.name = "ExampleMod"
