@@ -73,8 +73,8 @@ subprojects {
     }
 
     val detectedPlatform = when {
-        project.name.contains("fabric", ignoreCase = true) -> "Fabric"
-        project.name.contains("forge", ignoreCase = true) -> "Forge"
+        project.name.contains("fabric", true) -> "Fabric"
+        project.name.contains("forge", true) -> "Forge"
         else -> "Common"
     }
     project.version = "${modVersion}+mc${mcVersion}-${detectedPlatform}"
@@ -82,5 +82,9 @@ subprojects {
     tasks.withType<Jar>().configureEach {
         archiveBaseName.set(baseName)
         archiveVersion.set(project.version.toString())
+    }
+
+    tasks.withType<Jar>().configureEach {
+        from(root.file("LICENSE"))
     }
 }
